@@ -37,7 +37,7 @@ void loop()
     delay(10);
     digitalWrite(TRIGGER, LOW);
     t = pulseIn(ECHO, HIGH);
-    d=t/69;
+    d=t/59;
     if (tiempo_aux1==0)
     {
       tiempo_aux1=millis();
