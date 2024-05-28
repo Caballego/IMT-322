@@ -1,0 +1,26 @@
+import smbus
+import time
+
+# Direccion I2C del ESP32
+ESP32_I2C_ADDRESS = 0x08
+
+# Inicializar I2C (canal 1)
+bus = smbus.SMBus(1)
+
+def leer_estado_puerta():
+    try:
+        estado = bus.read_byte(ESP32_I2C_ADDRESS)
+        if estado == 0:
+            return "CERRADA"
+        elif estado == 1:
+            return "ABIERTA"
+        elif estado == 2:
+            return "BLOQUEADA"
+    except Exception as e:
+        print(f"Error al leer estado de la puerta: {e}")
+        return "DESCONOCIDO"
+
+while True:
+    estado_puerta = leer_estado_puerta()
+    print(f"Estado de la puerta: {estado_puerta}")
+    time.sleep(2)
